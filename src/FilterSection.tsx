@@ -61,26 +61,24 @@ export default function FormControlLabelPlacement() {
         query MyData {
             countries {
                 name
-                population
                 id
-                currencies {
-                  name
-                }
+                alpha3Code
                 cities {
                   name
                 }
-                capital {
-                  name
-                }
-                alpha3Code
                 languages {
                   name
                 }
-            }
+                population
+                currencies {
+                  name
+                }
+              }
         }
     `
     const [queryString, setQueryString] = React.useState(query)
     const { loading, error, data } = useQuery(queryString)
+
     React.useEffect(() => {
         handleSumbit()
     }, [data])
@@ -125,6 +123,7 @@ export default function FormControlLabelPlacement() {
     const handleSumbit = () => {
         const { selectedFields } = state
         let cols = [] as ItemType[]
+
         items.forEach(item => {
             selectedFields.forEach(field => {
                 if (item.value === field) {
@@ -148,6 +147,7 @@ export default function FormControlLabelPlacement() {
 
         const queryString = gql`query MyData { ${value} {${props}}}`
         setQueryString(queryString)
+
         let queryResult
         if (data) {
             switch (value) {
@@ -187,7 +187,7 @@ export default function FormControlLabelPlacement() {
                         row[`col${j}`] = queryResult[i].population
                         break
                     case 'currencies':
-                        row[`col${j}`] = queryResult[i].currencies?.name
+                        row[`col${j}`] = queryResult[i].currencies[0]?.name
                         break
                     case 'languages':
                         row[`col${j}`] = queryResult[i].languages[0]?.name
@@ -221,7 +221,7 @@ export default function FormControlLabelPlacement() {
                             onChange={handleCheckChange}
                             name="countries"
                             color="primary"
-                            disabled={value !== 'continents' ? true : false}
+                            disabled={value === 'continents' ? false : true}
                         />
                     }
                     label="Countries"
@@ -295,18 +295,6 @@ export default function FormControlLabelPlacement() {
                         />
                     }
                     label="Language"
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={state.timeZone}
-                            onChange={handleCheckChange}
-                            name="timeZone"
-                            color="primary"
-                            disabled={value === 'cities' ? false : true}
-                        />
-                    }
-                    label="TimeZone"
                 />
                 <FormControlLabel
                     control={

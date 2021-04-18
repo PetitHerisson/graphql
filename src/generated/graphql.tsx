@@ -551,19 +551,16 @@ export type MyDataQuery = (
   { __typename?: 'Query' }
   & { countries: Array<(
     { __typename?: 'Country' }
-    & Pick<Country, 'name' | 'population' | 'id' | 'alpha3Code'>
-    & { currencies: Array<(
-      { __typename?: 'Currency' }
-      & Pick<Currency, 'name'>
-    )>, cities: Array<(
-      { __typename?: 'City' }
-      & Pick<City, 'name'>
-    )>, capital?: Maybe<(
+    & Pick<Country, 'name' | 'id' | 'alpha3Code' | 'population'>
+    & { cities: Array<(
       { __typename?: 'City' }
       & Pick<City, 'name'>
     )>, languages: Array<(
       { __typename?: 'Language' }
       & Pick<Language, 'name'>
+    )>, currencies: Array<(
+      { __typename?: 'Currency' }
+      & Pick<Currency, 'name'>
     )> }
   )> }
 );
@@ -573,19 +570,16 @@ export const MyDataDocument = gql`
     query MyData {
   countries {
     name
-    population
     id
-    currencies {
-      name
-    }
+    alpha3Code
     cities {
       name
     }
-    capital {
+    languages {
       name
     }
-    alpha3Code
-    languages {
+    population
+    currencies {
       name
     }
   }
