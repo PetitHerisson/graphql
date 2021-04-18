@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-https://github.com/PetitHerisson/graphql/blob/master/Screen%20Shot%20.png
+![alt text](https://github.com/PetitHerisson/graphql/blob/master/Screen%20Shot%20.png)
 ## Available Scripts
 
 In the project directory, you can run:
